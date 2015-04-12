@@ -1,0 +1,18 @@
+select version();
+create database Hospital;
+show databases;
+use hospital;
+select database();
+create table `Patient Details`(PId tinyint Primary key, PName varchar(15), DOB date, `Last visit date` date, Address varchar(30), `Ph.No.` int);
+desc `Patient Details`;
+create table `Treatment Details`(PId tinyint, `Doctor ID` tinyint, cost float(7,2), `Amount Paid` float(7,2), `Type of Disease` varchar(30));
+desc `Treatment Details`;
+alter table `Treatment Details` change cost Cost float(7,2);
+create table D(`Doctor ID` tinyint primary key, `Doctor Name` varchar(15), Address varchar(50), `Ph.No.` int);
+desc D;
+rename table D to `Doctor Details`;
+desc `Doctor Details`;
+select @@autocommit;
+alter table `Treatment Details` add foreign key(PId) references `Patient Details`(PId);
+alter table `Treatment Details` add foreign key(`Doctor ID`) references `Doctor Details`(`Doctor ID`);
+alter table `Treatment Details` add foreign key(PId);
